@@ -210,7 +210,6 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
-import { useRouter } from 'vue-router'
 
 // 类型定义
 interface NavItem {
@@ -363,6 +362,7 @@ const totalPages = computed(() => Math.ceil(filteredNotices.value.length / pageS
 // 方法
 const handleNavClick = (index: number, href: string) => {
   currentNav.value = index
+  href = href
   // TODO: 路由跳转
 }
 
@@ -383,7 +383,7 @@ const sortNotices = () => {
   console.log('排序方式:', sortBy.value)
 }
 
-const viewNoticeDetail = (notice: NoticeCard) => {
+const viewNoticeDetail = (notice: {title: string}) => {
   // TODO: 跳转到详情页
   alert(`查看通知详情：${notice.title}`)
 }

@@ -230,12 +230,6 @@ interface QuickLink {
   href: string
 }
 
-interface ContactItem {
-  icon: string
-  title: string
-  content: string
-}
-
 interface SocialLink {
   icon: string
   href: string

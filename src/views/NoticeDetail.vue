@@ -364,6 +364,7 @@ const comments = ref<Comment[]>([
 // 方法
 const handleNavClick = (index: number, href: string) => {
   currentNav.value = index
+  href = href
   // TODO: 路由跳转
 }
 

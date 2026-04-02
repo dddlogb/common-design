@@ -61,10 +61,9 @@ const router = createRouter({
 })
 
 // 全局前置守卫：可以在这里设置页面标题等
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => { // 使用下划线变量忽略
   // 设置页面标题
   document.title = to.meta.title as string || '企业官网通知系统'
-  
   // 继续导航
   next()
 })

@@ -195,15 +195,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, onMounted, nextTick, watch } from 'vue'
-import HeaderNav from '../components/HeaderNav.vue'
-import FooterSection from '../components/FooterSection.vue'
-import { useRouter, useRoute } from 'vue-router'
+import { ref, computed, reactive, onMounted, nextTick} from 'vue'
+import { useRouter} from 'vue-router'
 import * as echarts from 'echarts'
 
 // 初始化 Vue Router
 const router = useRouter()
-const route = useRoute()
 
 // 导航数据
 const navItems = [

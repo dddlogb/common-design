@@ -388,18 +388,6 @@ const submitReply = () => {
   replyingTo.value = null
 }
 
-// 切换评论置顶状态
-const togglePinComment = (commentId: number) => {
-  const comment = comments.value.find(c => c.id === commentId)
-  if (comment) {
-    comment.isPinned = !comment.isPinned
-  }
-}
-
-const formatDate = (dateStr: string) => {
-  return dateStr.replace(/(\d{4}-\d{2}-\d{2}).*/, '$1')
-}
-
 const formatNumber = (num: number) => {
   if (num >= 10000) {
     return (num / 10000).toFixed(1) + '万'
