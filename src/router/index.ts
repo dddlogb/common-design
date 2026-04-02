@@ -4,6 +4,8 @@ import DataReport from '../views/DataReport.vue'
 import NewsDetail from '../views/NewsDetail.vue'
 import DepartmentNews from '../views/DepartmentNews.vue'
 import DepartmentNewsDetail from '../views/DepartmentNewsDetail.vue'
+import NoticeList from '../views/NoticeList.vue'
+import NoticeDetail from '../views/NoticeDetail.vue'
 
 const routes = [
   {
@@ -37,6 +39,19 @@ const routes = [
     component: DepartmentNewsDetail,
     props: true, // 允许将路由参数作为 props 传递给组件
     meta: { title: '部门动态详情 - 企业官网通知系统' }
+  },
+  {
+    path: '/notice',
+    name: 'NoticeList',
+    component: NoticeList,
+    meta: { title: '通知公告 - 企业官网通知系统' }
+  },
+  {
+    path: '/notice/:id',
+    name: 'NoticeDetail',
+    component: NoticeDetail,
+    props: true, // 允许将路由参数作为 props 传递给组件
+    meta: { title: '通知详情 - 企业官网通知系统' }
   }
 ]
 

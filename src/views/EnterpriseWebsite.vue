@@ -217,6 +217,7 @@ interface NewsItem {
 }
 
 interface NoticeItem {
+  id: number
   title: string
   priority: 'high' | 'medium' | 'low'
   badge?: '紧急' | '重要'
@@ -338,12 +339,12 @@ const newsList: NewsItem[] = [
 ]
 
 const notices: NoticeItem[] = [
-  { title: '关于清明节放假安排的通知', priority: 'high', badge: '紧急', time: '2 小时前' },
-  { title: '系统升级维护公告', priority: 'high', badge: '重要', time: '5 小时前' },
-  { title: '关于开展春季运动会报名的通知', priority: 'medium', time: '1 天前' },
-  { title: '新版员工手册发布通知', priority: 'medium', time: '2 天前' },
-  { title: '办公区域节能降耗倡议书', priority: 'low', time: '3 天前' },
-  { title: '食堂新菜品上线通知', priority: 'low', time: '1 周前' }
+  { id: 1, title: '关于清明节放假安排的通知', priority: 'high', badge: '紧急', time: '2 小时前' },
+  { id: 2, title: '系统升级维护公告', priority: 'high', badge: '重要', time: '5 小时前' },
+  { id: 3, title: '关于开展春季运动会报名的通知', priority: 'medium', time: '1 天前' },
+  { id: 4, title: '新版员工手册发布通知', priority: 'medium', time: '2 天前' },
+  { id: 5, title: '办公区域节能降耗倡议书', priority: 'low', time: '3 天前' },
+  { id: 6, title: '食堂新菜品上线通知', priority: 'low', time: '1 周前' }
 ]
 
 const quickLinks: QuickLink[] = [
@@ -498,8 +499,11 @@ const viewNewsDetail = (news: NewsItem) => {
 }
 
 const viewNoticeDetail = (notice: NoticeItem) => {
-  alert(`查看通知详情：${notice.title}`)
-  // TODO: 实现详情查看逻辑
+  // 跳转到通知公告详情页面，使用 Vue Router
+  router.push({
+    name: 'NoticeDetail',
+    params: { id: notice.id }
+  })
 }
 
 const handleQuickLink = (link: QuickLink) => {
