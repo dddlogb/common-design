@@ -1,34 +1,15 @@
 <template>
   <div class="notice-list-page">
-    <!-- 顶部导航栏 -->
-    <header class="header">
-      <div class="header-container">
-        <div class="logo">
-          <div class="logo-icon">🏢</div>
-          <span>企业通知系统</span>
-        </div>
-        <ul class="nav-menu">
-          <li v-for="(item, index) in navItems" :key="index">
-            <a 
-              :href="item.href" 
-              :class="{ active: currentNav === index }"
-              @click.prevent="handleNavClick(index, item.href)"
-            >
-              {{ item.label }}
-            </a>
-          </li>
-        </ul>
-        <div class="search-box">
-          <input 
-            type="text" 
-            v-model="searchQuery"
-            placeholder="搜索通知..."
-            @keyup.enter="handleSearch"
-          >
-          <button @click="handleSearch">🔍</button>
-        </div>
-      </div>
-    </header>
+    <!-- 顶部导航栏 - 使用 HeaderNav 组件 -->
+    <HeaderNav 
+      :nav-items="navItems"
+      :current-nav="currentNav"
+      :search-query="searchQuery"
+      @update:current-nav="currentNav = $event"
+      @update:search-query="searchQuery = $event"
+      @nav-click="handleNavClick"
+      @search="handleSearch"
+    />
 
     <!-- 面包屑导航 -->
     <div class="breadcrumb-container">
@@ -89,7 +70,7 @@
         <!-- 通知列表 -->
         <div :class="['notice-list', viewMode]">
           <div 
-            v-for="(notice, index) in filteredNotices" 
+            v-for="(notice, index) in paginatedNotices" 
             :key="index"
             :class="['notice-card', `priority-${notice.priority}`]"
           >
@@ -210,6 +191,10 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import HeaderNav from '../components/HeaderNav.vue'
+
+const router = useRouter()
 
 // 类型定义
 interface NavItem {
@@ -341,7 +326,7 @@ const archives = ref<Archive[]>([
   { label: '2024 年 2 月', period: '2024-02', count: 38 }
 ])
 
-// 计算属性
+// 计算属性 - 过滤后的通知列表（支持筛选、搜索）
 const filteredNotices = computed(() => {
   let result = [...allNotices]
   
@@ -354,7 +339,24 @@ const filteredNotices = computed(() => {
     result = result.filter(n => n.priority === 'low')
   }
   
+  // 按搜索关键词过滤
+  if (searchQuery.value.trim()) {
+    const query = searchQuery.value.toLowerCase()
+    result = result.filter(n => 
+      n.title.toLowerCase().includes(query) ||
+      n.excerpt.toLowerCase().includes(query) ||
+      n.department.toLowerCase().includes(query)
+    )
+  }
+  
   return result
+})
+
+// 当前页显示的通知（支持分页）
+const paginatedNotices = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = start + pageSize
+  return filteredNotices.value.slice(start, end)
 })
 
 const totalPages = computed(() => Math.ceil(filteredNotices.value.length / pageSize))
@@ -362,30 +364,84 @@ const totalPages = computed(() => Math.ceil(filteredNotices.value.length / pageS
 // 方法
 const handleNavClick = (index: number, href: string) => {
   currentNav.value = index
-  href = href
-  // TODO: 路由跳转
+  
+  // 使用 Vue Router 进行跳转
+  if (href === '#home') {
+    router.push({ name: 'Home' })
+  } else if (href === '#news') {
+    // 跳转到首页并滚动到新闻中心
+    router.push({ name: 'Home' }).then(() => {
+      setTimeout(() => {
+        const newsSection = document.getElementById('news')
+        if (newsSection) {
+          newsSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  } else if (href === '#notice') {
+    // 跳转到通知公告列表页
+    router.push({ name: 'NoticeList' })
+  } else if (href === '#department') {
+    // 跳转到部门动态页面
+    router.push({ name: 'DepartmentNews' })
+  } else if (href === '#contact') {
+    // 跳转到首页并滚动到联系我们
+    router.push({ name: 'Home' }).then(() => {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact')
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  }
 }
 
 const goHome = () => {
-  // TODO: 返回首页
-  alert('返回首页')
+  // 使用 Vue Router 返回首页
+  router.push({ name: 'Home' })
 }
 
 const handleSearch = () => {
   if (searchQuery.value.trim()) {
-    alert(`搜索：${searchQuery.value}`)
-    // TODO: 实现搜索
+    // 搜索功能已通过computed属性filteredNotices实现
+    // 这里可以添加额外的搜索逻辑，比如调用API
+    console.log('搜索内容:', searchQuery.value)
   }
 }
 
 const sortNotices = () => {
-  // TODO: 实现排序逻辑
-  console.log('排序方式:', sortBy.value)
+  // 排序逻辑 - 根据sortBy的值对通知进行排序
+  const sorted = [...allNotices]
+  
+  switch (sortBy.value) {
+    case 'date_desc':
+      sorted.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+      break
+    case 'date_asc':
+      sorted.sort((a, b) => new Date(a.publishDate).getTime() - new Date(b.publishDate).getTime())
+      break
+    case 'views':
+      sorted.sort((a, b) => b.views - a.views)
+      break
+    case 'priority':
+      const priorityOrder = { high: 3, medium: 2, low: 1 }
+      sorted.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority])
+      break
+  }
+  
+  // 更新allNotices（注意：实际项目中应该使用响应式更新）
+  Object.assign(allNotices, sorted)
 }
 
-const viewNoticeDetail = (notice: {title: string}) => {
-  // TODO: 跳转到详情页
-  alert(`查看通知详情：${notice.title}`)
+const viewNoticeDetail = (notice: NoticeCard | { id: number; title: string }) => {
+  // 跳转到通知详情页
+  if ('id' in notice) {
+    router.push({ 
+      name: 'NoticeDetail', 
+      params: { id: notice.id }
+    })
+  }
 }
 
 const formatNumber = (num: number): string => {
@@ -398,17 +454,22 @@ const formatNumber = (num: number): string => {
 const changePage = (page: number) => {
   if (page < 1 || page > totalPages.value) return
   currentPage.value = page
-  // TODO: 加载对应页面数据
+  // 滚动到列表顶部
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const filterByCategory = (categoryName: string) => {
-  alert(`筛选分类：${categoryName}`)
-  // TODO: 实现分类筛选
+  // 根据分类筛选通知
+  searchQuery.value = categoryName
+  currentPage.value = 1
 }
 
 const filterByMonth = (period: string) => {
-  alert(`筛选月份：${period}`)
-  // TODO: 实现月份筛选
+  // 根据月份筛选通知
+  // period格式为 "2024-04"
+  const [year, month] = period.split('-')
+  searchQuery.value = `${year}年${parseInt(month)}月`
+  currentPage.value = 1
 }
 </script>
 

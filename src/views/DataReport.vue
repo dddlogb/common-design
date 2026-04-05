@@ -1,25 +1,13 @@
 <template>
   <div class="data-report-page">
-    <!-- 顶部导航栏 - 复用主页样式 -->
-    <header class="header">
-      <div class="header-container">
-        <div class="logo">
-          <div class="logo-icon">🏢</div>
-          <span>企业通知系统</span>
-        </div>
-        <ul class="nav-menu">
-          <li v-for="(item, index) in navItems" :key="index">
-            <a 
-              href="#home"
-              :class="{ active: currentNav === index }"
-              @click.prevent="goHome"
-            >
-              {{ item.label }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </header>
+    <!-- 顶部导航栏 - 使用 HeaderNav 组件 -->
+    <HeaderNav 
+      :nav-items="navItems"
+      :current-nav="currentNav"
+      :search-query="''"
+      @update:current-nav="currentNav = $event"
+      @nav-click="handleNavClick"
+    />
 
     <!-- 页面标题 -->
     <section class="page-header">
@@ -196,15 +184,20 @@
 
 <script setup lang="ts">
 import { ref, computed, reactive, onMounted, nextTick} from 'vue'
-import { useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
+import HeaderNav from '../components/HeaderNav.vue'
 
 // 初始化 Vue Router
 const router = useRouter()
 
-// 导航数据
+// 导航数据 - 完整的导航菜单
 const navItems = [
-  { label: '返回首页', href: '#home' }
+  { label: '首页', href: '#home' },
+  { label: '新闻中心', href: '#news' },
+  { label: '通知公告', href: '#notice' },
+  { label: '部门动态', href: '#department' },
+  { label: '联系我们', href: '#contact' }
 ]
 
 const currentNav = ref(0)
@@ -213,6 +206,42 @@ const currentNav = ref(0)
 const goHome = () => {
   // 使用 Vue Router 返回主页
   router.push({ name: 'Home' })
+}
+
+// 处理导航点击
+const handleNavClick = (index: number, href: string) => {
+  currentNav.value = index
+  
+  // 使用 Vue Router 进行跳转
+  if (href === '#home') {
+    router.push({ name: 'Home' })
+  } else if (href === '#news') {
+    // 跳转到首页并滚动到新闻中心
+    router.push({ name: 'Home' }).then(() => {
+      setTimeout(() => {
+        const newsSection = document.getElementById('news')
+        if (newsSection) {
+          newsSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  } else if (href === '#notice') {
+    // 跳转到通知公告列表页
+    router.push({ name: 'NoticeList' })
+  } else if (href === '#department') {
+    // 跳转到部门动态页面
+    router.push({ name: 'DepartmentNews' })
+  } else if (href === '#contact') {
+    // 跳转到首页并滚动到联系我们
+    router.push({ name: 'Home' }).then(() => {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact')
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  }
 }
 
 // 报表筛选

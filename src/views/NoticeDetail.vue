@@ -1,25 +1,13 @@
 <template>
   <div class="notice-detail-page">
-    <!-- 顶部导航栏 (复用) -->
-    <header class="header">
-      <div class="header-container">
-        <div class="logo">
-          <div class="logo-icon">🏢</div>
-          <span>企业通知系统</span>
-        </div>
-        <ul class="nav-menu">
-          <li v-for="(item, index) in navItems" :key="index">
-            <a 
-              :href="item.href" 
-              :class="{ active: currentNav === index }"
-              @click.prevent="handleNavClick(index, item.href)"
-            >
-              {{ item.label }}
-            </a>
-          </li>
-        </ul>
-      </div>
-    </header>
+    <!-- 顶部导航栏 - 使用 HeaderNav 组件 -->
+    <HeaderNav 
+      :nav-items="navItems"
+      :current-nav="currentNav"
+      :search-query="''"
+      @update:current-nav="currentNav = $event"
+      @nav-click="handleNavClick"
+    />
 
     <!-- 面包屑导航 -->
     <div class="breadcrumb-container">
@@ -227,6 +215,10 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import HeaderNav from '../components/HeaderNav.vue'
+
+const router = useRouter()
 
 // 类型定义
 interface NavItem {
@@ -364,17 +356,47 @@ const comments = ref<Comment[]>([
 // 方法
 const handleNavClick = (index: number, href: string) => {
   currentNav.value = index
-  href = href
-  // TODO: 路由跳转
+  
+  // 使用 Vue Router 进行跳转
+  if (href === '#home') {
+    router.push({ name: 'Home' })
+  } else if (href === '#news') {
+    // 跳转到首页并滚动到新闻中心
+    router.push({ name: 'Home' }).then(() => {
+      setTimeout(() => {
+        const newsSection = document.getElementById('news')
+        if (newsSection) {
+          newsSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  } else if (href === '#notice') {
+    // 跳转到通知公告列表页
+    router.push({ name: 'NoticeList' })
+  } else if (href === '#department') {
+    // 跳转到部门动态页面
+    router.push({ name: 'DepartmentNews' })
+  } else if (href === '#contact') {
+    // 跳转到首页并滚动到联系我们
+    router.push({ name: 'Home' }).then(() => {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact')
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    })
+  }
 }
 
 const goBack = () => {
-  window.history.back()
+  // 使用 Vue Router 返回上一页
+  router.back()
 }
 
 const goToNoticeList = () => {
-  // TODO: 跳转到通知列表
-  alert('跳转到通知公告列表页')
+  // 跳转到通知公告列表页
+  router.push({ name: 'NoticeList' })
 }
 
 const formatNumber = (num: number): string => {
@@ -405,8 +427,11 @@ const previewImage = (index: number) => {
 }
 
 const viewRelatedNotice = (item: RelatedNotice) => {
-  alert(`查看相关通知：${item.title}`)
-  // TODO: 跳转到相关通知
+  // 跳转到相关通知详情页
+  router.push({ 
+    name: 'NoticeDetail', 
+    params: { id: item.id }
+  })
 }
 
 const shareNotice = () => {
