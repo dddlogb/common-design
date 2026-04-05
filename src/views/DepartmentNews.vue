@@ -515,6 +515,7 @@ onMounted(() => {
   font-weight: 600;
   line-height: 1.4;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -527,6 +528,7 @@ onMounted(() => {
   font-size: 0.9rem;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   flex: 1;
