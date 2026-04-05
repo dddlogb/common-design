@@ -33,6 +33,48 @@
       </div>
     </section>
 
+    <!-- 搜索结果区域 -->
+    <section v-if="showSearchResults" class="search-results-section" id="search-results">
+      <div class="search-results-container">
+        <div class="search-results-header">
+          <h2>搜索结果</h2>
+          <span class="results-count">找到 {{ searchResults.length }} 条结果</span>
+          <button class="clear-search-btn" @click="clearSearch">✕ 清除搜索</button>
+        </div>
+
+        <div v-if="searchResults.length === 0" class="no-results">
+          <div class="no-results-icon">🔍</div>
+          <p>未找到与 "{{ searchQuery }}" 相关的内容</p>
+          <p class="no-results-hint">建议：尝试使用不同的关键词，或检查拼写</p>
+        </div>
+
+        <div v-else class="results-list">
+          <div 
+            v-for="(result, index) in searchResults" 
+            :key="index"
+            class="result-item"
+            @click="viewSearchResult(result)"
+          >
+            <div class="result-type-badge" :class="result.type">
+              {{ result.type === 'news' ? '📰 新闻' : '📢 通知' }}
+            </div>
+            
+            <h3 class="result-title">{{ result.title }}</h3>
+            
+            <p v-if="result.excerpt" class="result-excerpt">{{ result.excerpt }}</p>
+            
+            <div class="result-meta">
+              <span v-if="result.category" class="result-category">{{ result.category }}</span>
+              <span v-if="result.date" class="result-date">{{ result.date }}</span>
+              <span v-if="result.badge" class="result-badge" :class="result.priority">
+                {{ result.badge }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 主要内容区域 -->
     <div class="main-container">
       <!-- 新闻中心 -->
@@ -255,6 +297,17 @@ interface EventItem {
 const currentNav = ref(0)
 const currentTab = ref(0)
 const searchQuery = ref('')
+const showSearchResults = ref(false)
+const searchResults = ref<{
+  type: 'news' | 'notice'
+  id?: number
+  title: string
+  excerpt?: string
+  category?: string
+  date?: string
+  priority?: 'high' | 'medium' | 'low'
+  badge?: '紧急' | '重要'
+}[]>([])
 
 const navItems: NavItem[] = [
   { label: '首页', href: '#home' },
@@ -475,9 +528,58 @@ const handleNavClick = (index: number, href: string) => {
 }
 
 const handleSearch = () => {
-  if (searchQuery.value.trim()) {
-    alert('搜索内容：' + searchQuery.value)
-    // TODO: 实现搜索逻辑
+  if (!searchQuery.value.trim()) {
+    showSearchResults.value = false
+    searchResults.value = []
+    return
+  }
+
+  const query = searchQuery.value.toLowerCase().trim()
+  const results: typeof searchResults.value = []
+
+  // 搜索新闻
+  newsList.forEach(news => {
+    if (
+      news.title.toLowerCase().includes(query) ||
+      news.excerpt.toLowerCase().includes(query) ||
+      news.category.toLowerCase().includes(query) ||
+      news.author.toLowerCase().includes(query)
+    ) {
+      results.push({
+        type: 'news',
+        id: news.id,
+        title: news.title,
+        excerpt: news.excerpt,
+        category: news.category,
+        date: news.date
+      })
+    }
+  })
+
+  // 搜索通知公告
+  notices.forEach(notice => {
+    if (notice.title.toLowerCase().includes(query)) {
+      results.push({
+        type: 'notice',
+        id: notice.id,
+        title: notice.title,
+        priority: notice.priority,
+        badge: notice.badge
+      })
+    }
+  })
+
+  searchResults.value = results
+  showSearchResults.value = true
+
+  // 如果有结果，滚动到搜索结果区域
+  if (results.length > 0) {
+    setTimeout(() => {
+      const searchResultsSection = document.getElementById('search-results')
+      if (searchResultsSection) {
+        searchResultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 100)
   }
 }
 
@@ -500,6 +602,28 @@ const viewNoticeDetail = (notice: NoticeItem) => {
     name: 'NoticeDetail',
     params: { id: notice.id }
   })
+}
+
+// 查看搜索结果详情
+const viewSearchResult = (result: typeof searchResults.value[0]) => {
+  if (result.type === 'news' && result.id) {
+    router.push({
+      name: 'NewsDetail',
+      params: { id: result.id }
+    })
+  } else if (result.type === 'notice' && result.id) {
+    router.push({
+      name: 'NoticeDetail',
+      params: { id: result.id }
+    })
+  }
+}
+
+// 清除搜索
+const clearSearch = () => {
+  searchQuery.value = ''
+  showSearchResults.value = false
+  searchResults.value = []
 }
 
 const handleQuickLink = (link: QuickLink) => {
@@ -631,8 +755,189 @@ const scrollToSection = (sectionId: string) => {
 }
 
 .stat-label {
-  font-size: 0.95rem;
+  font-size: 1rem;
   opacity: 0.9;
+}
+
+/* 搜索结果区域 */
+.search-results-section {
+  background: #f8f9fa;
+  padding: 40px 0;
+  border-bottom: 3px solid #3498db;
+}
+
+.search-results-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.search-results-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.search-results-header h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.results-count {
+  font-size: 1rem;
+  color: #7f8c8d;
+  background: white;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.clear-search-btn {
+  margin-left: auto;
+  padding: 8px 20px;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.clear-search-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.no-results-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.no-results p {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+  margin: 10px 0;
+}
+
+.no-results-hint {
+  font-size: 0.95rem !important;
+  color: #95a5a6 !important;
+  margin-top: 15px !important;
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-item {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.3s;
+  border-left: 4px solid transparent;
+}
+
+.result-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-left-color: #3498db;
+}
+
+.result-type-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.result-type-badge.news {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.result-type-badge.notice {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.result-title {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+}
+
+.result-item:hover .result-title {
+  color: #3498db;
+}
+
+.result-excerpt {
+  font-size: 0.95rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.result-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.result-category {
+  font-size: 0.9rem;
+  color: #3498db;
+  background: #ebf5fb;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.result-date {
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+.result-badge {
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.result-badge.high {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.result-badge.medium {
+  background: #fff3e0;
+  color: #ef6c00;
 }
 
 /* 主要内容区域 */
