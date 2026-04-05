@@ -259,9 +259,9 @@ const searchQuery = ref('')
 const navItems: NavItem[] = [
   { label: '首页', href: '#home' },
   { label: '新闻中心', href: '#news' },
-  { label: '通知公告', href: '#notice' },
-  { label: '部门动态', href: '#department' },
-  { label: '政策法规', href: '#policy' },
+  { label: '通知公告', href: '/notice' },
+  { label: '部门动态', href: '/department-news' },
+  { label: '数据报表', href: '/data-report' },
   { label: '联系我们', href: '#contact' }
 ]
 
@@ -447,18 +447,20 @@ const handleNavClick = (index: number, href: string) => {
       }, 100)
     })
   } else if (href === '#notice') {
-    // 跳转到通知公告
-    router.push({ name: 'Home' }).then(() => {
-      setTimeout(() => {
-        const noticeSection = document.getElementById('notice')
-        if (noticeSection) {
-          noticeSection.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
-    })
+    // 跳转到通知公告列表页
+    router.push({ name: 'NoticeList' })
+  } else if (href === '/notice') {
+    // 跳转到通知公告列表页
+    router.push({ name: 'NoticeList' })
   } else if (href === '#department') {
     // 跳转到部门动态页面
     router.push({ name: 'DepartmentNews' })
+  } else if (href === '/department-news') {
+    // 跳转到部门动态页面
+    router.push({ name: 'DepartmentNews' })
+  } else if (href === '/data-report') {
+    // 跳转到数据报表页面
+    router.push({ name: 'DataReport' })
   } else if (href === '#contact') {
     // 跳转到联系我们
     router.push({ name: 'Home' }).then(() => {

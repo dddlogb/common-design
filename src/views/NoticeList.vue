@@ -234,7 +234,7 @@ interface Archive {
 }
 
 // 响应式数据
-const currentNav = ref(0)
+const currentNav = ref(2) // 默认高亮"通知公告"（索引为2）
 const currentFilter = ref(0)
 const searchQuery = ref('')
 const sortBy = ref('date_desc')
@@ -246,8 +246,8 @@ const navItems: NavItem[] = [
   { label: '首页', href: '/' },
   { label: '新闻中心', href: '/news' },
   { label: '通知公告', href: '/notice' },
-  { label: '部门动态', href: '/department' },
-  { label: '政策法规', href: '/policy' }
+  { label: '部门动态', href: '/department-news' },
+  { label: '数据报表', href: '/data-report' }
 ]
 
 const filterTabs: FilterTab[] = [
@@ -366,10 +366,10 @@ const handleNavClick = (index: number, href: string) => {
   currentNav.value = index
   
   // 使用 Vue Router 进行跳转
-  if (href === '#home') {
+  if (href === '/' || href === '#home') {
     router.push({ name: 'Home' })
-  } else if (href === '#news') {
-    // 跳转到首页并滚动到新闻中心
+  } else if (href === '/news' || href === '#news') {
+    // 跳转到首页并滚动到新闻中心（如果有新闻列表页则跳转）
     router.push({ name: 'Home' }).then(() => {
       setTimeout(() => {
         const newsSection = document.getElementById('news')
@@ -378,12 +378,15 @@ const handleNavClick = (index: number, href: string) => {
         }
       }, 100)
     })
-  } else if (href === '#notice') {
+  } else if (href === '/notice' || href === '#notice') {
     // 跳转到通知公告列表页
     router.push({ name: 'NoticeList' })
-  } else if (href === '#department') {
+  } else if (href === '/department-news' || href === '#department') {
     // 跳转到部门动态页面
     router.push({ name: 'DepartmentNews' })
+  } else if (href === '/data-report') {
+    // 跳转到数据报表页面
+    router.push({ name: 'DataReport' })
   } else if (href === '#contact') {
     // 跳转到首页并滚动到联系我们
     router.push({ name: 'Home' }).then(() => {

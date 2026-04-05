@@ -258,7 +258,7 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         <p>二季度市场营销工作重点:</p>
         <ul>
           <li><strong>目标:</strong>签约 6000 万元，回款 5500 万元</li>
-          <li><strong>策略:</strong>聚焦重点行业，深耕细分市场</li>
+          <strong>策略:</strong>聚焦重点行业，深耕细分市场</li>
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">市场营销部</p>
@@ -465,15 +465,15 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
 }
 
 const newsData = ref<DepartmentNewsDetail>(getNewsById(getNewsId()))
-const currentNav = ref(0)
+const currentNav = ref(3) // 默认高亮"部门动态"（索引为3）
 const searchQuery = ref('')
 
 const navItems = [
-  { label: '首页', href: '#home' },
-  { label: '新闻中心', href: '#news' },
-  { label: '通知公告', href: '#notice' },
-  { label: '部门动态', href: '#department' },
-  { label: '联系我们', href: '#contact' }
+  { label: '首页', href: '/' },
+  { label: '新闻中心', href: '/news' },
+  { label: '通知公告', href: '/notice' },
+  { label: '部门动态', href: '/department-news' },
+  { label: '数据报表', href: '/data-report' }
 ]
 
 const aboutText = '企业通知系统是公司官方信息发布平台'
@@ -550,9 +550,9 @@ const handleShare = () => {
 const handleNavClick = (index: number, href: string) => {
   currentNav.value = index
   
-  if (href === '#home') {
+  if (href === '/' || href === '#home') {
     router.push({ name: 'Home' })
-  } else if (href === '#news') {
+  } else if (href === '/news' || href === '#news') {
     router.push({ name: 'Home' }).then(() => {
       setTimeout(() => {
         const newsSection = document.getElementById('news')
@@ -561,10 +561,12 @@ const handleNavClick = (index: number, href: string) => {
         }
       }, 100)
     })
-  } else if (href === '#notice') {
+  } else if (href === '/notice' || href === '#notice') {
     router.push({ name: 'NoticeList' })
-  } else if (href === '#department') {
+  } else if (href === '/department-news' || href === '#department') {
     router.push({ name: 'DepartmentNews' })
+  } else if (href === '/data-report') {
+    router.push({ name: 'DataReport' })
   } else if (href === '#contact') {
     router.push({ name: 'Home' }).then(() => {
       setTimeout(() => {
