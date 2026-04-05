@@ -186,6 +186,16 @@
         </div>
       </aside>
     </div>
+    
+    <!-- 页脚 -->
+    <FooterSection 
+      :about-text="aboutText"
+      :social-links="socialLinks"
+      :footer-sections="footerSections"
+      :footer-info="footerInfo"
+      @social-click="handleSocialClick"
+      @footer-link-click="handleFooterLink"
+    />
   </div>
 </template>
 
@@ -193,6 +203,7 @@
 import { ref, computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import HeaderNav from '../components/HeaderNav.vue'
+import FooterSection from '../components/FooterSection.vue'
 
 const router = useRouter()
 
@@ -233,6 +244,30 @@ interface Archive {
   count: number
 }
 
+interface SocialLink {
+  icon: string
+  href: string
+  platform: string
+}
+
+interface FooterLink {
+  label: string
+  href: string
+}
+
+interface FooterSection {
+  title: string
+  links: FooterLink[]
+}
+
+interface FooterInfo {
+  email: string
+  phone: string
+  address: string
+  icp: string
+  police: string
+}
+
 // 响应式数据
 const currentNav = ref(2) // 默认高亮"通知公告"（索引为2）
 const currentFilter = ref(0)
@@ -249,6 +284,53 @@ const navItems: NavItem[] = [
   { label: '部门动态', href: '/department-news' },
   { label: '数据报表', href: '/data-report' }
 ]
+
+// Footer相关数据
+const aboutText = '企业通知系统是公司官方信息发布平台，致力于及时、准确、全面地传递企业信息，促进内部沟通与交流。'
+
+const socialLinks: SocialLink[] = [
+  { icon: '💬', href: '#', platform: '微信' },
+  { icon: '📧', href: '#', platform: '邮箱' },
+  { icon: '🌐', href: '#', platform: '官网' }
+]
+
+const footerSections: FooterSection[] = [
+  {
+    title: '快速链接',
+    links: [
+      { label: '✨ 设为首页', href: '#' },
+      { label: '⭐ 加入收藏', href: '#' },
+      { label: '📱 手机版', href: '#' },
+      { label: '🗺️ 网站地图', href: '#' }
+    ]
+  },
+  {
+    title: '信息分类',
+    links: [
+      { label: '📰 公司新闻', href: '#' },
+      { label: '📢 通知公告', href: '#' },
+      { label: '🎯 部门动态', href: '#' },
+      { label: '📊 数据报表', href: '#' }
+    ]
+  },
+  {
+    title: '帮助中心',
+    links: [
+      { label: '📖 使用指南', href: '#' },
+      { label: '❓ 常见问题', href: '#' },
+      { label: '🔧 技术支持', href: '#' },
+      { label: '📞 联系客服', href: '#' }
+    ]
+  }
+]
+
+const footerInfo = reactive({
+  email: 'contact@company.com',
+  phone: '010-8888 8888',
+  address: '北京市朝阳区建国路 88 号',
+  icp: '京 ICP 备 XXXXXXXX 号',
+  police: '京公网安备 XXXXXXXXXXXXXX 号'
+})
 
 const filterTabs: FilterTab[] = [
   { label: '全部', value: 'all' },
@@ -411,6 +493,17 @@ const handleSearch = () => {
     // 这里可以添加额外的搜索逻辑，比如调用API
     console.log('搜索内容:', searchQuery.value)
   }
+}
+
+// Footer相关事件处理
+const handleSocialClick = (social: SocialLink) => {
+  alert(`访问${social.platform}`)
+  // TODO: 实现社交链接跳转
+}
+
+const handleFooterLink = (link: FooterLink) => {
+  alert(`跳转到：${link.label}`)
+  // TODO: 实现页脚链接跳转
 }
 
 const sortNotices = () => {

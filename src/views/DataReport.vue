@@ -167,18 +167,16 @@
         </div>
       </div>
     </div>
-
+    
     <!-- 页脚 -->
-    <footer class="footer">
-      <div class="footer-bottom">
-        <p>&copy; 2024 企业通知系统。All Rights Reserved.</p>
-        <p>
-          📧 Email: contact@company.com &nbsp;&nbsp;|&nbsp;&nbsp; 
-          📱 Tel: 010-8888 8888 &nbsp;&nbsp;|&nbsp;&nbsp; 
-          📍 Add: 北京市朝阳区建国路 88 号
-        </p>
-      </div>
-    </footer>
+    <FooterSection 
+      :about-text="aboutText"
+      :social-links="socialLinks"
+      :footer-sections="footerSections"
+      :footer-info="footerInfo"
+      @social-click="handleSocialClick"
+      @footer-link-click="handleFooterLink"
+    />
   </div>
 </template>
 
@@ -187,12 +185,43 @@ import { ref, computed, reactive, onMounted, nextTick} from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import HeaderNav from '../components/HeaderNav.vue'
+import FooterSection from '../components/FooterSection.vue'
 
 // 初始化 Vue Router
 const router = useRouter()
 
+// 类型定义
+interface NavItem {
+  label: string
+  href: string
+}
+
+interface SocialLink {
+  icon: string
+  href: string
+  platform: string
+}
+
+interface FooterLink {
+  label: string
+  href: string
+}
+
+interface FooterSection {
+  title: string
+  links: FooterLink[]
+}
+
+interface FooterInfo {
+  email: string
+  phone: string
+  address: string
+  icp: string
+  police: string
+}
+
 // 导航数据 - 完整的导航菜单
-const navItems = [
+const navItems: NavItem[] = [
   { label: '首页', href: '/' },
   { label: '新闻中心', href: '/news' },
   { label: '通知公告', href: '/notice' },
@@ -201,6 +230,53 @@ const navItems = [
 ]
 
 const currentNav = ref(4) // 默认高亮"数据报表"（索引为4）
+
+// Footer相关数据
+const aboutText = '企业通知系统是公司官方信息发布平台，致力于及时、准确、全面地传递企业信息，促进内部沟通与交流。'
+
+const socialLinks: SocialLink[] = [
+  { icon: '💬', href: '#', platform: '微信' },
+  { icon: '📧', href: '#', platform: '邮箱' },
+  { icon: '🌐', href: '#', platform: '官网' }
+]
+
+const footerSections: FooterSection[] = [
+  {
+    title: '快速链接',
+    links: [
+      { label: '✨ 设为首页', href: '#' },
+      { label: '⭐ 加入收藏', href: '#' },
+      { label: '📱 手机版', href: '#' },
+      { label: '🗺️ 网站地图', href: '#' }
+    ]
+  },
+  {
+    title: '信息分类',
+    links: [
+      { label: '📰 公司新闻', href: '#' },
+      { label: '📢 通知公告', href: '#' },
+      { label: '🎯 部门动态', href: '#' },
+      { label: '📊 数据报表', href: '#' }
+    ]
+  },
+  {
+    title: '帮助中心',
+    links: [
+      { label: '📖 使用指南', href: '#' },
+      { label: '❓ 常见问题', href: '#' },
+      { label: '🔧 技术支持', href: '#' },
+      { label: '📞 联系客服', href: '#' }
+    ]
+  }
+]
+
+const footerInfo = reactive({
+  email: 'contact@company.com',
+  phone: '010-8888 8888',
+  address: '北京市朝阳区建国路 88 号',
+  icp: '京 ICP 备 XXXXXXXX 号',
+  police: '京公网安备 XXXXXXXXXXXXXX 号'
+})
 
 // 返回首页
 const goHome = () => {
@@ -558,6 +634,17 @@ const handleDownloadReport = (item: any) => {
   alert(`下载报表：${item.name}`)
   // TODO: 实现下载逻辑
 }
+
+const handleSocialClick = (social: SocialLink) => {
+  alert(`访问${social.platform}`)
+  // TODO: 实现社交链接跳转
+}
+
+const handleFooterLink = (link: FooterLink) => {
+  alert(`跳转到：${link.label}`)
+  // TODO: 实现页脚链接跳转
+}
+
 </script>
 
 <style scoped>
