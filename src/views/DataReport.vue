@@ -4,10 +4,21 @@
     <HeaderNav 
       :nav-items="navItems"
       :current-nav="currentNav"
-      :search-query="''"
+      :search-query="searchQuery"
       @update:current-nav="currentNav = $event"
+      @update:search-query="searchQuery = $event"
       @nav-click="handleNavClick"
-    />
+      @search="handleSearch"
+    >
+      <template #search>
+        <NavSearch 
+          v-model="searchQuery"
+          search-scope="all"
+          placeholder="搜索报表..."
+          @search="handleSearch"
+        />
+      </template>
+    </HeaderNav>
 
     <!-- 页面标题 -->
     <section class="page-header">
@@ -185,6 +196,7 @@ import { ref, computed, reactive, onMounted, nextTick} from 'vue'
 import { useRouter } from 'vue-router'
 import * as echarts from 'echarts'
 import HeaderNav from '../components/HeaderNav.vue'
+import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 
 // 初始化 Vue Router
@@ -230,6 +242,12 @@ const navItems: NavItem[] = [
 ]
 
 const currentNav = ref(4) // 默认高亮"数据报表"（索引为4）
+const searchQuery = ref('') // 导航栏搜索关键词
+const selectedType = ref('all')
+const selectedTimeRange = ref('month')
+const searchTableQuery = ref('')
+const tablePageSize = ref(10)
+const currentPage = ref(1)
 
 // Footer相关数据
 const aboutText = '企业通知系统是公司官方信息发布平台，致力于及时、准确、全面地传递企业信息，促进内部沟通与交流。'
@@ -322,12 +340,14 @@ const handleNavClick = (index: number, href: string) => {
   }
 }
 
-// 报表筛选
-const selectedType = ref('all')
-const selectedTimeRange = ref('month')
-const searchTableQuery = ref('')
-const tablePageSize = ref(10)
-const currentPage = ref(1)
+// 搜索处理
+const handleSearch = () => {
+  if (searchQuery.value.trim()) {
+    console.log('搜索报表:', searchQuery.value)
+    // TODO: 实现报表搜索逻辑
+    alert(`搜索数据报表：${searchQuery.value}`)
+  }
+}
 
 // 统计数据
 const reportStats = reactive([

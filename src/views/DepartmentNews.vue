@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import HeaderNav from '../components/HeaderNav.vue'
+import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 import { useRouter } from 'vue-router'
 
@@ -248,7 +249,16 @@ onMounted(() => {
       @update:search-query="searchQuery = $event"
       @nav-click="handleNavClick"
       @search="handleSearch"
-    />
+    >
+      <template #search>
+        <NavSearch 
+          v-model="searchQuery"
+          search-scope="department"
+          placeholder="搜索部门动态..."
+          @search="handleSearch"
+        />
+      </template>
+    </HeaderNav>
 
     <div class="page-header">
       <div class="header-content">
