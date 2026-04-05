@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import HeaderNav from '../components/HeaderNav.vue'
+import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 import { useRouter, useRoute } from 'vue-router'
 
@@ -418,7 +419,16 @@ watch(() => route.params.id, (newId, oldId) => {
       @update:search-query="searchQuery = $event"
       @nav-click="handleNavClick"
       @search="handleSearch"
-    />
+    >
+      <template #search>
+        <NavSearch 
+          v-model="searchQuery"
+          search-scope="news"
+          placeholder="搜索新闻中心..."
+          @search="handleSearch"
+        />
+      </template>
+    </HeaderNav>
 
     <!-- 页面标题 -->
     <section class="page-header">

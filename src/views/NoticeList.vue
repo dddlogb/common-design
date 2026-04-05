@@ -9,7 +9,16 @@
       @update:search-query="searchQuery = $event"
       @nav-click="handleNavClick"
       @search="handleSearch"
-    />
+    >
+      <template #search>
+        <NavSearch 
+          v-model="searchQuery"
+          search-scope="notice"
+          placeholder="搜索通知公告..."
+          @search="handleSearch"
+        />
+      </template>
+    </HeaderNav>
 
     <!-- 面包屑导航 -->
     <div class="breadcrumb-container">
@@ -203,6 +212,7 @@
 import { ref, computed, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import HeaderNav from '../components/HeaderNav.vue'
+import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 
 const router = useRouter()

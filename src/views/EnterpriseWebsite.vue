@@ -9,7 +9,16 @@
       @update:search-query="searchQuery = $event"
       @nav-click="handleNavClick"
       @search="handleSearch"
-    />
+    >
+      <template #search>
+        <NavSearch 
+          v-model="searchQuery"
+          search-scope="all"
+          placeholder="搜索通知、新闻、部门动态..."
+          @search="handleSearch"
+        />
+      </template>
+    </HeaderNav>
 
     <!-- 横幅区域 -->
     <section class="banner">
@@ -228,6 +237,7 @@
 <script setup lang="ts">
 import { ref, computed, reactive } from 'vue'
 import HeaderNav from '../components/HeaderNav.vue'
+import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 import { useRouter } from 'vue-router'
 

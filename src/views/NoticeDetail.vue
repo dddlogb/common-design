@@ -4,10 +4,21 @@
     <HeaderNav 
       :nav-items="navItems"
       :current-nav="currentNav"
-      :search-query="''"
+      :search-query="searchQuery"
       @update:current-nav="currentNav = $event"
+      @update:search-query="searchQuery = $event"
       @nav-click="handleNavClick"
-    />
+      @search="handleSearch"
+    >
+      <template #search>
+        <NavSearch 
+          v-model="searchQuery"
+          search-scope="notice"
+          placeholder="搜索通知公告..."
+          @search="handleSearch"
+        />
+      </template>
+    </HeaderNav>
 
     <!-- 面包屑导航 -->
     <div class="breadcrumb-container">
@@ -227,6 +238,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import HeaderNav from '../components/HeaderNav.vue'
+import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 
 const router = useRouter()
@@ -294,6 +306,7 @@ interface FooterInfo {
 
 // 响应式数据
 const currentNav = ref(2) // 默认高亮"通知公告"（索引为2）
+const searchQuery = ref('') // 搜索关键词
 const isFavorite = ref(false)
 const newComment = ref('')
 const fontSizeIndex = ref(0) // 0: 大，1: 中，2: 小
@@ -452,25 +465,21 @@ const handleNavClick = (index: number, href: string) => {
         }
       }, 100)
     })
-  } else if (href === '/notice' || href === '#notice') {
-    // 跳转到通知公告列表页
+  } else if (href === '/notices' || href === '#notices') {
     router.push({ name: 'NoticeList' })
-  } else if (href === '/department-news' || href === '#department') {
-    // 跳转到部门动态页面
+  } else if (href === '/departments' || href === '#departments') {
     router.push({ name: 'DepartmentNews' })
-  } else if (href === '/data-report') {
-    // 跳转到数据报表页面
+  } else if (href === '/data-report' || href === '#data-report') {
     router.push({ name: 'DataReport' })
-  } else if (href === '#contact') {
-    // 跳转到首页并滚动到联系我们
-    router.push({ name: 'Home' }).then(() => {
-      setTimeout(() => {
-        const contactSection = document.getElementById('contact')
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth' })
-        }
-      }, 100)
-    })
+  }
+}
+
+// 搜索处理
+const handleSearch = () => {
+  if (searchQuery.value.trim()) {
+    console.log('搜索通知公告:', searchQuery.value)
+    // TODO: 实现通知搜索逻辑
+    alert(`搜索通知公告：${searchQuery.value}`)
   }
 }
 
