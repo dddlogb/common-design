@@ -270,13 +270,6 @@ interface FooterSection {
   links: FooterLink[]
 }
 
-interface FooterInfo {
-  email: string
-  phone: string
-  address: string
-  icp: string
-  police: string
-}
 
 // 响应式数据
 const currentNav = ref(2) // 默认高亮"通知公告"（索引为2）
@@ -954,6 +947,7 @@ const filterByMonth = (period: string) => {
   line-height: 1.6;
   margin-bottom: 15px;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;

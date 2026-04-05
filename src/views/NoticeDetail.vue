@@ -296,13 +296,6 @@ interface FooterSection {
   links: FooterLink[]
 }
 
-interface FooterInfo {
-  email: string
-  phone: string
-  address: string
-  icp: string
-  police: string
-}
 
 // 响应式数据
 const currentNav = ref(2) // 默认高亮"通知公告"（索引为2）

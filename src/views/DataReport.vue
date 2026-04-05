@@ -224,13 +224,6 @@ interface FooterSection {
   links: FooterLink[]
 }
 
-interface FooterInfo {
-  email: string
-  phone: string
-  address: string
-  icp: string
-  police: string
-}
 
 // 导航数据 - 完整的导航菜单
 const navItems: NavItem[] = [
@@ -297,10 +290,6 @@ const footerInfo = reactive({
 })
 
 // 返回首页
-const goHome = () => {
-  // 使用 Vue Router 返回主页
-  router.push({ name: 'Home' })
-}
 
 // 处理导航点击
 const handleNavClick = (index: number, href: string) => {
