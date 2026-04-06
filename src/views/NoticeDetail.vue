@@ -362,8 +362,8 @@ const footerInfo = reactive({
 // 通知详情数据
 const notice = reactive({
   id: 1,
-  title: '关于 2024 年清明节放假安排的通知',
-  publishDate: '2024-04-02 10:30',
+  title: '关于 2026 年清明节放假安排的通知',
+  publishDate: '2026-04-02 10:30',
   department: '行政部',
   views: 1256,
   comments: 23,
@@ -372,10 +372,10 @@ const notice = reactive({
   content: `
     <p>公司各部门：</p>
     
-    <p>根据《国务院办公厅关于 2024 年部分节假日安排的通知》精神，结合公司实际情况，现将 2024 年清明节放假安排通知如下：</p>
+    <p>根据《国务院办公厅关于 2026 年部分节假日安排的通知》精神，结合公司实际情况，现将 2026 年清明节放假安排通知如下：</p>
     
     <h3>一、放假时间</h3>
-    <p>2024 年 4 月 4 日（星期四）至 4 月 6 日（星期六）放假调休，共 3 天。4 月 7 日（星期日）上班。</p>
+    <p>2026 年 4 月 4 日（星期四）至 4 月 6 日（星期六）放假调休，共 3 天。4 月 7 日（星期日）上班。</p>
     
     <h3>二、注意事项</h3>
     <ol>
@@ -396,11 +396,11 @@ const notice = reactive({
     
     <p style="text-align: right; margin-top: 50px;">
       行政部<br>
-      2024 年 4 月 2 日
+      2026 年 4 月 2 日
     </p>
   `,
   attachments: [
-    { name: '2024 年节假日安排表.pdf', url: '#', type: 'pdf', size: '1.2MB' },
+    { name: '2026 年节假日安排表.pdf', url: '#', type: 'pdf', size: '1.2MB' },
     { name: '清明节值班表.docx', url: '#', type: 'doc', size: '256KB' }
   ] as Attachment[],
   images: [] as NoticeImage[]
@@ -408,9 +408,9 @@ const notice = reactive({
 
 // 相关通知
 const relatedNotices = ref<RelatedNotice[]>([
-  { id: 2, title: '关于 2024 年春节放假安排的通知', date: '2024-01-15' },
-  { id: 3, title: '关于 2024 年五一劳动节放假的通知', date: '2024-04-20' },
-  { id: 4, title: '关于加强节假日安全管理的通知', date: '2024-03-10' }
+  { id: 2, title: '关于 2026 年春节放假安排的通知', date: '2026-01-15' },
+  { id: 3, title: '关于 2026 年五一劳动节放假的通知', date: '2026-04-20' },
+  { id: 4, title: '关于加强节假日安全管理的通知', date: '2026-03-10' }
 ])
 
 // 评论数据
@@ -421,7 +421,7 @@ const comments = ref<Comment[]>([
     avatar: 'https://ui-avatars.com/api/?name=李明&background=3498db&color=fff',
     department: '技术部',
     content: '收到，谢谢行政部的安排！',
-    time: '2024-04-02 11:30',
+    time: '2026-04-02 11:30',
     likes: 12,
     liked: false,
     showReply: false,
@@ -433,7 +433,7 @@ const comments = ref<Comment[]>([
     avatar: 'https://ui-avatars.com/api/?name=王芳&background=e74c3c&color=fff',
     department: '财务部',
     content: '已经安排好值班了，大家节日快乐！',
-    time: '2024-04-02 14:20',
+    time: '2026-04-02 14:20',
     likes: 8,
     liked: false,
     showReply: false,

@@ -50,12 +50,12 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
       id: 1,
       department: '行政部',
       departmentIcon: '🏢',
-      title: '行政部召开 2024 年第一季度工作总结会议',
+      title: '行政部召开 2026 年第一季度工作总结会议',
       content: `
-        <p>4 月 1 日，行政部在会议室召开 2024 年第一季度工作总结会议，全面总结第一季度工作成果，部署第二季度重点工作任务。</p>
+        <p>4 月 1 日，行政部在会议室召开 2026 年第一季度工作总结会议，全面总结第一季度工作成果，部署第二季度重点工作任务。</p>
         
         <h2>一、第一季度工作回顾</h2>
-        <p>会议指出，2024 年第一季度，行政部紧紧围绕公司中心工作，认真履行部门职责，在以下几个方面取得了显著成效:</p>
+        <p>会议指出，2026 年第一季度，行政部紧紧围绕公司中心工作，认真履行部门职责，在以下几个方面取得了显著成效:</p>
         
         <h3>1. 行政管理方面</h3>
         <ul>
@@ -98,27 +98,27 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         <p>会议号召，全体人员要以更加饱满的热情、更加务实的作风、更加有力的举措，扎实做好各项工作，为公司高质量发展贡献力量!</p>
         
         <p style="text-align: right; margin-top: 40px;">行政部</p>
-        <p style="text-align: right;">2024 年 4 月 1 日</p>
+        <p style="text-align: right;">2026 年 4 月 1 日</p>
       `,
-      publishDate: '2024-04-01',
+      publishDate: '2026-04-01',
       author: '行政部',
       views: 856,
       attachments: [
-        { id: 1, name: '行政部 2024 年第一季度工作总结.pdf', size: '1.2 MB' },
+        { id: 1, name: '行政部 2026 年第一季度工作总结.pdf', size: '1.2 MB' },
         { id: 2, name: '第二季度工作计划表.xlsx', size: '156 KB' }
       ],
       relatedNews: [
-        { id: 2, title: '人力资源部举办新员工入职培训', date: '2024-03-28', department: '人力资源部' },
-        { id: 5, title: '财务部组织开展预算编制培训', date: '2024-03-20', department: '财务部' }
+        { id: 2, title: '人力资源部举办新员工入职培训', date: '2026-03-28', department: '人力资源部' },
+        { id: 5, title: '财务部组织开展预算编制培训', date: '2026-03-20', department: '财务部' }
       ]
     },
     2: {
       id: 2,
       department: '人力资源部',
       departmentIcon: '👥',
-      title: '人力资源部举办 2024 年第一期新员工入职培训',
+      title: '人力资源部举办 2026 年第一期新员工入职培训',
       content: `
-        <p>3 月 28 日至 29 日，人力资源部在公司培训中心举办了 2024 年第一期新员工入职培训班，共有 35 名来自各部门的新员工参加培训。</p>
+        <p>3 月 28 日至 29 日，人力资源部在公司培训中心举办了 2026 年第一期新员工入职培训班，共有 35 名来自各部门的新员工参加培训。</p>
         
         <h2>一、培训内容</h2>
         <p>本次培训为期两天，内容丰富、形式多样，主要包括以下几个模块:</p>
@@ -156,17 +156,17 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         <p>人力资源部将为每位新员工安排导师，进行为期三个月的在岗指导和培养，帮助新员工尽快适应工作岗位，融入团队。</p>
         
         <p style="text-align: right; margin-top: 40px;">人力资源部</p>
-        <p style="text-align: right;">2024 年 3 月 28 日</p>
+        <p style="text-align: right;">2026 年 3 月 28 日</p>
       `,
-      publishDate: '2024-03-28',
+      publishDate: '2026-03-28',
       author: '人力资源部',
       views: 1234,
       attachments: [
         { id: 1, name: '新员工入职培训手册.pdf', size: '2.8 MB' }
       ],
       relatedNews: [
-        { id: 1, title: '行政部召开第一季度工作总结会议', date: '2024-04-01', department: '行政部' },
-        { id: 5, title: '财务部组织开展预算编制培训', date: '2024-03-20', department: '财务部' }
+        { id: 1, title: '行政部召开第一季度工作总结会议', date: '2026-04-01', department: '行政部' },
+        { id: 5, title: '财务部组织开展预算编制培训', date: '2026-03-20', department: '财务部' }
       ]
     },
     3: {
@@ -210,17 +210,17 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">技术研发部</p>
-        <p style="text-align: right;">2024 年 3 月 25 日</p>
+        <p style="text-align: right;">2026 年 3 月 25 日</p>
       `,
-      publishDate: '2024-03-25',
+      publishDate: '2026-03-25',
       author: '技术研发部',
       views: 2156,
       attachments: [
         { id: 1, name: '产品技术白皮书.pdf', size: '5.6 MB' }
       ],
       relatedNews: [
-        { id: 4, title: '市场营销部一季度业绩创新高', date: '2024-03-22', department: '市场营销部' },
-        { id: 7, title: '信息技术部完成办公系统升级', date: '2024-03-15', department: '信息技术部' }
+        { id: 4, title: '市场营销部一季度业绩创新高', date: '2026-03-22', department: '市场营销部' },
+        { id: 7, title: '信息技术部完成办公系统升级', date: '2026-03-15', department: '信息技术部' }
       ]
     },
     4: {
@@ -232,7 +232,7 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         <p>在市场环境复杂多变的情况下，市场营销部开拓创新、锐意进取，一季度签约金额突破 5000 万元，实现了开门红。</p>
         
         <h2>一、业绩数据</h2>
-        <p>2024 年一季度主要经济指标:</p>
+        <p>2026 年一季度主要经济指标:</p>
         <ul>
           <li><strong>签约金额:</strong> 5,200 万元，同比增长 35%</li>
           <li><strong>回款金额:</strong> 4,800 万元，回款率 92%</li>
@@ -263,26 +263,26 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">市场营销部</p>
-        <p style="text-align: right;">2024 年 3 月 22 日</p>
+        <p style="text-align: right;">2026 年 3 月 22 日</p>
       `,
-      publishDate: '2024-03-22',
+      publishDate: '2026-03-22',
       author: '市场营销部',
       views: 1876,
       attachments: [
         { id: 1, name: '一季度营销数据分析报告.pdf', size: '2.1 MB' }
       ],
       relatedNews: [
-        { id: 3, title: '技术研发部完成核心模块开发', date: '2024-03-25', department: '技术研发部' },
-        { id: 1, title: '行政部召开第一季度工作总结会议', date: '2024-04-01', department: '行政部' }
+        { id: 3, title: '技术研发部完成核心模块开发', date: '2026-03-25', department: '技术研发部' },
+        { id: 1, title: '行政部召开第一季度工作总结会议', date: '2026-04-01', department: '行政部' }
       ]
     },
     5: {
       id: 5,
       department: '财务部',
       departmentIcon: '💰',
-      title: '财务部组织开展 2024 年预算编制培训',
+      title: '财务部组织开展 2026 年预算编制培训',
       content: `
-        <p>为提高各部门预算编制的科学性和准确性，财务部于 3 月 20 日组织了 2024 年预算编制专题培训，各部门负责人和预算专员共 60 余人参加培训。</p>
+        <p>为提高各部门预算编制的科学性和准确性，财务部于 3 月 20 日组织了 2026 年预算编制专题培训，各部门负责人和预算专员共 60 余人参加培训。</p>
         
         <h2>一、培训内容</h2>
         
@@ -309,9 +309,9 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">财务部</p>
-        <p style="text-align: right;">2024 年 3 月 20 日</p>
+        <p style="text-align: right;">2026 年 3 月 20 日</p>
       `,
-      publishDate: '2024-03-20',
+      publishDate: '2026-03-20',
       author: '财务部',
       views: 945,
       attachments: [
@@ -319,8 +319,8 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         { id: 2, name: '预算编制模板.xlsx', size: '456 KB' }
       ],
       relatedNews: [
-        { id: 1, title: '行政部召开第一季度工作总结会议', date: '2024-04-01', department: '行政部' },
-        { id: 2, title: '人力资源部举办新员工培训', date: '2024-03-28', department: '人力资源部' }
+        { id: 1, title: '行政部召开第一季度工作总结会议', date: '2026-04-01', department: '行政部' },
+        { id: 2, title: '人力资源部举办新员工培训', date: '2026-03-28', department: '人力资源部' }
       ]
     },
     6: {
@@ -332,7 +332,7 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         <p>3 月 15 日至 18 日，中国质量认证中心审核组对公司进行了 ISO9001 质量管理体系监督审核，公司顺利通过复审认证。</p>
         
         <h2>一、审核概况</h2>
-        <p><strong>审核时间:</strong> 2024 年 3 月 15 日 -18 日</p>
+        <p><strong>审核时间:</strong> 2026 年 3 月 15 日 -18 日</p>
         <p><strong>审核范围:</strong> 产品设计开发、生产制造、销售及售后服务全过程</p>
         
         <h2>二、审核亮点</h2>
@@ -353,17 +353,17 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">质量管理部</p>
-        <p style="text-align: right;">2024 年 3 月 18 日</p>
+        <p style="text-align: right;">2026 年 3 月 18 日</p>
       `,
-      publishDate: '2024-03-18',
+      publishDate: '2026-03-18',
       author: '质量管理部',
       views: 1123,
       attachments: [
         { id: 1, name: 'ISO9001 认证证书.pdf', size: '1.5 MB' }
       ],
       relatedNews: [
-        { id: 3, title: '技术研发部完成核心模块开发', date: '2024-03-25', department: '技术研发部' },
-        { id: 5, title: '财务部组织预算编制培训', date: '2024-03-20', department: '财务部' }
+        { id: 3, title: '技术研发部完成核心模块开发', date: '2026-03-25', department: '技术研发部' },
+        { id: 5, title: '财务部组织预算编制培训', date: '2026-03-20', department: '财务部' }
       ]
     },
     7: {
@@ -400,17 +400,17 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">信息技术部</p>
-        <p style="text-align: right;">2024 年 3 月 15 日</p>
+        <p style="text-align: right;">2026 年 3 月 15 日</p>
       `,
-      publishDate: '2024-03-15',
+      publishDate: '2026-03-15',
       author: '信息技术部',
       views: 1567,
       attachments: [
         { id: 1, name: '办公系统使用手册.pdf', size: '4.5 MB' }
       ],
       relatedNews: [
-        { id: 3, title: '技术研发部完成核心模块开发', date: '2024-03-25', department: '技术研发部' },
-        { id: 6, title: '质量管理部通过 ISO9001 复审', date: '2024-03-18', department: '质量管理部' }
+        { id: 3, title: '技术研发部完成核心模块开发', date: '2026-03-25', department: '技术研发部' },
+        { id: 6, title: '质量管理部通过 ISO9001 复审', date: '2026-03-18', department: '质量管理部' }
       ]
     },
     8: {
@@ -422,7 +422,7 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         <p>通过优化服务流程、加强人员培训等措施，一季度客户满意度调查结果显示满意度达 98.5%,创历史新高。</p>
         
         <h2>一、调查结果</h2>
-        <p>2024 年一季度客户满意度调查基本情况:</p>
+        <p>2026 年一季度客户满意度调查基本情况:</p>
         <ul>
           <li><strong>调查对象:</strong> 活跃客户 500 家</li>
           <li><strong>回收问卷:</strong> 428 份，回收率 85.6%</li>
@@ -447,17 +447,17 @@ const getNewsById = (id: number): DepartmentNewsDetail => {
         </ul>
         
         <p style="text-align: right; margin-top: 40px;">客户服务部</p>
-        <p style="text-align: right;">2024 年 3 月 12 日</p>
+        <p style="text-align: right;">2026 年 3 月 12 日</p>
       `,
-      publishDate: '2024-03-12',
+      publishDate: '2026-03-12',
       author: '客户服务部',
       views: 1345,
       attachments: [
         { id: 1, name: '客户满意度调查报告.pdf', size: '2.3 MB' }
       ],
       relatedNews: [
-        { id: 4, title: '市场营销部一季度业绩创新高', date: '2024-03-22', department: '市场营销部' },
-        { id: 2, title: '人力资源部举办新员工培训', date: '2024-03-28', department: '人力资源部' }
+        { id: 4, title: '市场营销部一季度业绩创新高', date: '2026-03-22', department: '市场营销部' },
+        { id: 2, title: '人力资源部举办新员工培训', date: '2026-03-28', department: '人力资源部' }
       ]
     }
   }

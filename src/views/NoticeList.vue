@@ -346,10 +346,10 @@ const filterTabs: FilterTab[] = [
 const allNotices = reactive<NoticeCard[]>([
   {
     id: 1,
-    title: '关于 2024 年清明节放假安排的通知',
+    title: '关于 2026 年清明节放假安排的通知',
     excerpt: '根据国务院办公厅通知精神，结合公司实际情况，现将清明节放假安排通知如下...',
     department: '行政部',
-    publishDate: '2024-04-02',
+    publishDate: '2026-04-02',
     day: '02',
     month: '4 月',
     views: 1256,
@@ -362,7 +362,7 @@ const allNotices = reactive<NoticeCard[]>([
     title: '关于系统升级维护的公告',
     excerpt: '为提高系统性能，公司将于本周末对办公系统进行升级维护...',
     department: '技术部',
-    publishDate: '2024-04-01',
+    publishDate: '2026-04-01',
     day: '01',
     month: '4 月',
     views: 892,
@@ -373,9 +373,9 @@ const allNotices = reactive<NoticeCard[]>([
   {
     id: 3,
     title: '关于开展春季运动会的通知',
-    excerpt: '为丰富员工文化生活，增强体质，公司决定举办 2024 年春季运动会...',
+    excerpt: '为丰富员工文化生活，增强体质，公司决定举办 2026 年春季运动会...',
     department: '工会',
-    publishDate: '2024-03-28',
+    publishDate: '2026-03-28',
     day: '28',
     month: '3 月',
     views: 2341,
@@ -406,9 +406,9 @@ const categories = ref<Category[]>([
 ])
 
 const archives = ref<Archive[]>([
-  { label: '2024 年 4 月', period: '2024-04', count: 23 },
-  { label: '2024 年 3 月', period: '2024-03', count: 45 },
-  { label: '2024 年 2 月', period: '2024-02', count: 38 }
+  { label: '2026 年 4 月', period: '2026-04', count: 23 },
+  { label: '2026 年 3 月', period: '2026-03', count: 45 },
+  { label: '2026 年 2 月', period: '2026-02', count: 38 }
 ])
 
 // 计算属性 - 过滤后的通知列表（支持筛选、搜索）

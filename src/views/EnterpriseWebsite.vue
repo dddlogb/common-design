@@ -235,7 +235,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive } from 'vue'
+import { ref, computed, reactive, onMounted, onUnmounted } from 'vue'
 import HeaderNav from '../components/HeaderNav.vue'
 import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
@@ -342,10 +342,10 @@ const newsList: NewsItem[] = [
     id: 1,
     icon: '📰',
     category: '公司新闻',
-    title: '公司召开 2024 年度战略规划会议，明确未来发展目标',
+    title: '公司召开 2026 年度战略规划会议，明确未来发展目标',
     excerpt: '本次会议深入分析了当前市场形势，制定了新一年的发展战略和重点工作任务，为公司的可持续发展奠定了坚实基础...',
     author: '行政部',
-    date: '2024-04-02',
+    date: '2026-04-02',
     views: 1256,
     comments: 45
   },
@@ -356,7 +356,7 @@ const newsList: NewsItem[] = [
     title: '公司与多家知名企业签署战略合作协议，共建产业生态圈',
     excerpt: '此次合作标志着公司在业务拓展方面迈出重要一步，将通过资源共享、优势互补，实现多方共赢发展...',
     author: '市场部',
-    date: '2024-03-28',
+    date: '2026-03-28',
     views: 2089,
     comments: 78
   },
@@ -367,7 +367,7 @@ const newsList: NewsItem[] = [
     title: '公司荣获"年度创新企业奖",技术创新能力获认可',
     excerpt: '在近日举办的行业盛典上，公司凭借卓越的技术创新能力和优秀的市场表现，从众多参选企业中脱颖而出，荣获此项殊荣...',
     author: '总经办',
-    date: '2024-03-20',
+    date: '2026-03-20',
     views: 3421,
     comments: 156
   },
@@ -378,7 +378,7 @@ const newsList: NewsItem[] = [
     title: '公司新一代智能产品正式发布，引领行业技术革新',
     excerpt: '该产品融合了最新的人工智能技术，在性能、用户体验等方面实现重大突破，将为客户带来全新的使用体验...',
     author: '产品部',
-    date: '2024-03-15',
+    date: '2026-03-15',
     views: 4567,
     comments: 203
   },
@@ -389,7 +389,7 @@ const newsList: NewsItem[] = [
     title: '公司举办中层管理人员能力提升培训班',
     excerpt: '为期三天的培训课程涵盖领导力提升、团队管理、沟通技巧等多个模块，旨在打造高素质的管理人才队伍...',
     author: '人力资源部',
-    date: '2024-03-10',
+    date: '2026-03-10',
     views: 1890,
     comments: 67
   }
@@ -419,11 +419,39 @@ const todayEvents: EventItem[] = [
   { time: '16:00', title: '客户接待' }
 ]
 
+// 实时获取当前日期时间
 const currentDate = reactive({
-  day: '02',
-  weekday: '星期四',
-  month: '4 月',
-  year: '2024'
+  day: '',
+  weekday: '',
+  month: '',
+  year: ''
+})
+
+// 更新日期时间的函数
+const updateCurrentDate = () => {
+  const now = new Date()
+  const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+  
+  currentDate.day = String(now.getDate()).padStart(2, '0')
+  currentDate.weekday = weekdays[now.getDay()]
+  currentDate.month = `${now.getMonth() + 1} 月`
+  currentDate.year = String(now.getFullYear())
+}
+
+// 组件挂载时启动定时器
+let timer: number | null = null
+
+onMounted(() => {
+  updateCurrentDate() // 立即更新一次
+  timer = window.setInterval(updateCurrentDate, 1000) // 每秒更新
+})
+
+// 组件卸载时清除定时器
+onUnmounted(() => {
+  if (timer !== null) {
+    clearInterval(timer)
+    timer = null
+  }
 })
 
 const contactInfo = reactive({

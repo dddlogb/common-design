@@ -28,9 +28,9 @@ const departmentNewsList: DepartmentNewsItem[] = [
     id: 1,
     department: '行政部',
     departmentIcon: '🏢',
-    title: '行政部召开 2024 年第一季度工作总结会议',
+    title: '行政部召开 2026 年第一季度工作总结会议',
     summary: '会议总结了第一季度在行政管理、后勤保障等方面的工作成果，部署了第二季度的重点工作任务。',
-    publishDate: '2024-04-01',
+    publishDate: '2026-04-01',
     author: '行政部',
     views: 856
   },
@@ -38,9 +38,9 @@ const departmentNewsList: DepartmentNewsItem[] = [
     id: 2,
     department: '人力资源部',
     departmentIcon: '👥',
-    title: '人力资源部举办 2024 年第一期新员工入职培训',
+    title: '人力资源部举办 2026 年第一期新员工入职培训',
     summary: '本期培训共有 35 名新员工参加，内容包括企业文化、规章制度、职业素养等多个模块。',
-    publishDate: '2024-03-28',
+    publishDate: '2026-03-28',
     author: '人力资源部',
     views: 1234
   },
@@ -50,7 +50,7 @@ const departmentNewsList: DepartmentNewsItem[] = [
     departmentIcon: '💻',
     title: '技术研发部成功完成新一代产品核心模块开发',
     summary: '经过三个月的攻关，技术团队攻克了多项技术难题，完成了产品核心模块的开发工作。',
-    publishDate: '2024-03-25',
+    publishDate: '2026-03-25',
     author: '技术研发部',
     views: 2156
   },
@@ -60,7 +60,7 @@ const departmentNewsList: DepartmentNewsItem[] = [
     departmentIcon: '📈',
     title: '市场营销部一季度业绩创新高，同比增长 35%',
     summary: '在市场环境复杂多变的情况下，营销团队开拓创新，一季度签约金额突破 5000 万元。',
-    publishDate: '2024-03-22',
+    publishDate: '2026-03-22',
     author: '市场营销部',
     views: 1876
   },
@@ -68,9 +68,9 @@ const departmentNewsList: DepartmentNewsItem[] = [
     id: 5,
     department: '财务部',
     departmentIcon: '💰',
-    title: '财务部组织开展 2024 年预算编制培训',
+    title: '财务部组织开展 2026 年预算编制培训',
     summary: '为提高各部门预算编制的科学性和准确性，财务部组织了专题培训。',
-    publishDate: '2024-03-20',
+    publishDate: '2026-03-20',
     author: '财务部',
     views: 945
   },
@@ -80,7 +80,7 @@ const departmentNewsList: DepartmentNewsItem[] = [
     departmentIcon: '✅',
     title: '质量管理部通过 ISO9001 质量管理体系复审',
     summary: '经过审核组的严格评审，公司质量管理体系运行情况良好，顺利通过复审认证。',
-    publishDate: '2024-03-18',
+    publishDate: '2026-03-18',
     author: '质量管理部',
     views: 1123
   },
@@ -90,7 +90,7 @@ const departmentNewsList: DepartmentNewsItem[] = [
     departmentIcon: '🔧',
     title: '信息技术部完成办公系统升级，提升工作效率',
     summary: '历时两个月的系统升级改造顺利完成，新增多项实用功能，员工办公效率提升 30%。',
-    publishDate: '2024-03-15',
+    publishDate: '2026-03-15',
     author: '信息技术部',
     views: 1567
   },
@@ -100,7 +100,7 @@ const departmentNewsList: DepartmentNewsItem[] = [
     departmentIcon: '🎧',
     title: '客户服务部客户满意度达 98.5%，创历史新高',
     summary: '通过优化服务流程、加强人员培训等措施，一季度客户满意度调查结果显示满意度达 98.5%。',
-    publishDate: '2024-03-12',
+    publishDate: '2026-03-12',
     author: '客户服务部',
     views: 1345
   }

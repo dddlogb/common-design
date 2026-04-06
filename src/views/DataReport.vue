@@ -348,18 +348,18 @@ const reportStats = reactive([
 
 // 表格数据
 const tableData = reactive([
-  { name: '2024 年 3 月通知发布统计', type: 'notice', typeLabel: '通知统计', createTime: '2024-04-01 09:30', dataSize: '1,234 条', status: 'completed', statusLabel: '已完成' },
-  { name: 'Q1 季度新闻阅读量分析', type: 'news', typeLabel: '新闻数据', createTime: '2024-04-01 10:15', dataSize: '5,678 条', status: 'completed', statusLabel: '已完成' },
-  { name: '部门发布数量排行榜', type: 'department', typeLabel: '部门排行', createTime: '2024-04-01 14:20', dataSize: '156 条', status: 'updating', statusLabel: '更新中' },
-  { name: '用户活跃度分析报告', type: 'user', typeLabel: '用户分析', createTime: '2024-04-01 16:45', dataSize: '2,345 条', status: 'completed', statusLabel: '已完成' },
-  { name: '2024 年 2 月通知发布统计', type: 'notice', typeLabel: '通知统计', createTime: '2024-03-01 09:00', dataSize: '1,089 条', status: 'completed', statusLabel: '已完成' },
-  { name: '热门新闻 TOP50 排行榜', type: 'news', typeLabel: '新闻数据', createTime: '2024-03-28 11:30', dataSize: '50 条', status: 'completed', statusLabel: '已完成' },
-  { name: '行政部月度工作报告', type: 'department', typeLabel: '部门排行', createTime: '2024-03-25 15:00', dataSize: '45 条', status: 'completed', statusLabel: '已完成' },
-  { name: '用户行为分析报表', type: 'user', typeLabel: '用户分析', createTime: '2024-03-20 10:20', dataSize: '3,456 条', status: 'failed', statusLabel: '失败' },
-  { name: '2024 年 1 月通知统计', type: 'notice', typeLabel: '通知统计', createTime: '2024-02-01 09:15', dataSize: '987 条', status: 'completed', statusLabel: '已完成' },
-  { name: '企业新闻传播效果分析', type: 'news', typeLabel: '新闻数据', createTime: '2024-02-28 16:30', dataSize: '4,567 条', status: 'completed', statusLabel: '已完成' },
-  { name: '技术部项目进度报告', type: 'department', typeLabel: '部门排行', createTime: '2024-02-25 14:00', dataSize: '67 条', status: 'completed', statusLabel: '已完成' },
-  { name: '用户增长趋势分析', type: 'user', typeLabel: '用户分析', createTime: '2024-02-20 11:45', dataSize: '2,890 条', status: 'completed', statusLabel: '已完成' }
+  { name: '2026 年 3 月通知发布统计', type: 'notice', typeLabel: '通知统计', createTime: '2026-04-01 09:30', dataSize: '1,234 条', status: 'completed', statusLabel: '已完成' },
+  { name: 'Q1 季度新闻阅读量分析', type: 'news', typeLabel: '新闻数据', createTime: '2026-04-01 10:15', dataSize: '5,678 条', status: 'completed', statusLabel: '已完成' },
+  { name: '部门发布数量排行榜', type: 'department', typeLabel: '部门排行', createTime: '2026-04-01 14:20', dataSize: '156 条', status: 'updating', statusLabel: '更新中' },
+  { name: '用户活跃度分析报告', type: 'user', typeLabel: '用户分析', createTime: '2026-04-01 16:45', dataSize: '2,345 条', status: 'completed', statusLabel: '已完成' },
+  { name: '2026 年 2 月通知发布统计', type: 'notice', typeLabel: '通知统计', createTime: '2026-03-01 09:00', dataSize: '1,089 条', status: 'completed', statusLabel: '已完成' },
+  { name: '热门新闻 TOP50 排行榜', type: 'news', typeLabel: '新闻数据', createTime: '2026-03-28 11:30', dataSize: '50 条', status: 'completed', statusLabel: '已完成' },
+  { name: '行政部月度工作报告', type: 'department', typeLabel: '部门排行', createTime: '2026-03-25 15:00', dataSize: '45 条', status: 'completed', statusLabel: '已完成' },
+  { name: '用户行为分析报表', type: 'user', typeLabel: '用户分析', createTime: '2026-03-20 10:20', dataSize: '3,456 条', status: 'failed', statusLabel: '失败' },
+  { name: '2026 年 1 月通知统计', type: 'notice', typeLabel: '通知统计', createTime: '2026-02-01 09:15', dataSize: '987 条', status: 'completed', statusLabel: '已完成' },
+  { name: '企业新闻传播效果分析', type: 'news', typeLabel: '新闻数据', createTime: '2026-02-28 16:30', dataSize: '4,567 条', status: 'completed', statusLabel: '已完成' },
+  { name: '技术部项目进度报告', type: 'department', typeLabel: '部门排行', createTime: '2026-02-25 14:00', dataSize: '67 条', status: 'completed', statusLabel: '已完成' },
+  { name: '用户增长趋势分析', type: 'user', typeLabel: '用户分析', createTime: '2026-02-20 11:45', dataSize: '2,890 条', status: 'completed', statusLabel: '已完成' }
 ])
 
 // 计算属性
