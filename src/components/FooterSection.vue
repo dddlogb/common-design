@@ -82,14 +82,11 @@ const handleFooterLink = (link: FooterLink) => {
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 企业通知系统。All Rights Reserved.</p>
+      <p>&copy; 2026 企业通知系统。All Rights Reserved.</p>
       <p>
         📧 Email: {{ footerInfo.email }} &nbsp;&nbsp;|&nbsp;&nbsp; 
         📱 Tel: {{ footerInfo.phone }} &nbsp;&nbsp;|&nbsp;&nbsp; 
         📍 Add: {{ footerInfo.address }}
-      </p>
-      <p style="margin-top: 10px;">
-        {{ footerInfo.icp }} | {{ footerInfo.police }}
       </p>
     </div>
   </footer>
