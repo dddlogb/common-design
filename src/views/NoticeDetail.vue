@@ -236,12 +236,13 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import HeaderNav from '../components/HeaderNav.vue'
 import NavSearch from '../components/NavSearch.vue'
 import FooterSection from '../components/FooterSection.vue'
 
 const router = useRouter()
+const route = useRoute()
 
 // 类型定义
 interface NavItem {
@@ -359,52 +360,176 @@ const footerInfo = reactive({
   police: '京公网安备 XXXXXXXXXXXXXX 号'
 })
 
-// 通知详情数据
-const notice = reactive({
-  id: 1,
-  title: '关于 2026 年清明节放假安排的通知',
-  publishDate: '2026-04-02 10:30',
-  department: '行政部',
-  views: 1256,
-  comments: 23,
-  priority: 'high',
-  category: '放假通知',
-  content: `
-    <p>公司各部门：</p>
-    
-    <p>根据《国务院办公厅关于 2026 年部分节假日安排的通知》精神，结合公司实际情况，现将 2026 年清明节放假安排通知如下：</p>
-    
-    <h3>一、放假时间</h3>
-    <p>2026 年 4 月 4 日（星期四）至 4 月 6 日（星期六）放假调休，共 3 天。4 月 7 日（星期日）上班。</p>
-    
-    <h3>二、注意事项</h3>
-    <ol>
-      <li>请各部门妥善安排好工作，确保节前各项工作正常完成。</li>
-      <li>放假前请关闭电脑、空调等设备，切断电源，关好门窗。</li>
-      <li>节假日期间，如有紧急工作安排，请提前与部门负责人沟通。</li>
-      <li>外出请注意人身和财产安全，做好个人防护措施。</li>
-    </ol>
-    
-    <h3>三、值班安排</h3>
-    <p>节假日期间公司安排专人值班，如有紧急情况请联系：</p>
-    <ul>
-      <li>值班电话：010-8888 8888</li>
-      <li>应急联系人：张经理 138****8888</li>
-    </ul>
-    
-    <p>特此通知。</p>
-    
-    <p style="text-align: right; margin-top: 50px;">
-      行政部<br>
-      2026 年 4 月 2 日
-    </p>
-  `,
-  attachments: [
-    { name: '2026 年节假日安排表.pdf', url: '#', type: 'pdf', size: '1.2MB' },
-    { name: '清明节值班表.docx', url: '#', type: 'doc', size: '256KB' }
-  ] as Attachment[],
-  images: [] as NoticeImage[]
-})
+// 通知详情数据 - 根据路由参数动态加载
+const noticeDataMap: Record<number, any> = {
+  1: {
+    id: 1,
+    title: '关于 2026 年清明节放假安排的通知',
+    publishDate: '2026-04-02 10:30',
+    department: '行政部',
+    views: 1256,
+    comments: 23,
+    priority: 'high',
+    category: '放假通知',
+    content: `
+      <p>公司各部门：</p>
+      
+      <p>根据《国务院办公厅关于 2026 年部分节假日安排的通知》精神，结合公司实际情况，现将 2026 年清明节放假安排通知如下：</p>
+      
+      <h3>一、放假时间</h3>
+      <p>2026 年 4 月 4 日（星期四）至 4 月 6 日（星期六）放假调休，共 3 天。4 月 7 日（星期日）上班。</p>
+      
+      <h3>二、注意事项</h3>
+      <ol>
+        <li>请各部门妥善安排好工作，确保节前各项工作正常完成。</li>
+        <li>放假前请关闭电脑、空调等设备，切断电源，关好门窗。</li>
+        <li>节假日期间，如有紧急工作安排，请提前与部门负责人沟通。</li>
+        <li>外出请注意人身和财产安全，做好个人防护措施。</li>
+      </ol>
+      
+      <h3>三、值班安排</h3>
+      <p>节假日期间公司安排专人值班，如有紧急情况请联系：</p>
+      <ul>
+        <li>值班电话：010-8888 8888</li>
+        <li>应急联系人：张经理 138****8888</li>
+      </ul>
+      
+      <p>特此通知。</p>
+      
+      <p style="text-align: right; margin-top: 50px;">
+        行政部<br>
+        2026 年 4 月 2 日
+      </p>
+    `,
+    attachments: [
+      { name: '2026 年节假日安排表.pdf', url: '#', type: 'pdf', size: '1.2MB' },
+      { name: '清明节值班表.docx', url: '#', type: 'doc', size: '256KB' }
+    ] as Attachment[],
+    images: [] as NoticeImage[]
+  },
+  2: {
+    id: 2,
+    title: '关于系统升级维护的公告',
+    publishDate: '2026-04-01 09:00',
+    department: '技术部',
+    views: 892,
+    comments: 15,
+    priority: 'high',
+    category: '系统维护',
+    content: `
+      <p>全体员工：</p>
+      
+      <p>为提高办公系统性能，优化用户体验，技术部将于本周末对系统进行升级维护。具体安排如下：</p>
+      
+      <h3>一、维护时间</h3>
+      <p>2026 年 4 月 6 日（星期六）22:00 至 4 月 7 日（星期日）06:00</p>
+      
+      <h3>二、影响范围</h3>
+      <ol>
+        <li>OA 办公系统将暂停服务</li>
+        <li>邮件系统可能短暂中断</li>
+        <li>内部通讯工具将暂时不可用</li>
+      </ol>
+      
+      <h3>三、注意事项</h3>
+      <ul>
+        <li>请提前保存重要文档和数据</li>
+        <li>建议在维护期间使用移动办公方式</li>
+        <li>如遇紧急情况，请联系技术支持热线</li>
+      </ul>
+      
+      <h3>四、技术支持</h3>
+      <p>维护期间如有紧急问题，请联系：</p>
+      <ul>
+        <li>技术支持热线：010-8888 9999</li>
+        <li>技术负责人：李工程师 139****9999</li>
+      </ul>
+      
+      <p>给您带来的不便，敬请谅解！</p>
+      
+      <p style="text-align: right; margin-top: 50px;">
+        技术部<br>
+        2026 年 4 月 1 日
+      </p>
+    `,
+    attachments: [
+      { name: '系统维护说明.pdf', url: '#', type: 'pdf', size: '856KB' }
+    ] as Attachment[],
+    images: [] as NoticeImage[]
+  },
+  3: {
+    id: 3,
+    title: '关于开展春季运动会的通知',
+    publishDate: '2026-03-28 14:00',
+    department: '工会',
+    views: 2341,
+    comments: 56,
+    priority: 'medium',
+    category: '活动通知',
+    content: `
+      <p>全体员工：</p>
+      
+      <p>为丰富员工文化生活，增强团队凝聚力，提高员工身体素质，公司决定举办 2026 年春季运动会。现将有关事宜通知如下：</p>
+      
+      <h3>一、活动时间</h3>
+      <p>2026 年 4 月 20 日（星期六）上午 8:30 - 下午 17:00</p>
+      
+      <h3>二、活动地点</h3>
+      <p>市体育中心田径场（地址：朝阳区体育路 168 号）</p>
+      
+      <h3>三、比赛项目</h3>
+      <ol>
+        <li><strong>田径项目：</strong>100米、400米、1500米、4×100米接力</li>
+        <li><strong>趣味项目：</strong>拔河比赛、跳绳比赛、袋鼠跳</li>
+        <li><strong>团体项目：</strong>篮球赛、足球赛、排球赛</li>
+      </ol>
+      
+      <h3>四、报名方式</h3>
+      <ul>
+        <li>报名时间：即日起至 4 月 10 日</li>
+        <li>报名方式：各部门统一报名，填写报名表后提交至工会办公室</li>
+        <li>每人限报 2 个项目（团体项目除外）</li>
+      </ul>
+      
+      <h3>五、奖项设置</h3>
+      <ul>
+        <li>个人项目：前 3 名颁发奖牌和奖金</li>
+        <li>团体项目：前 3 名颁发奖杯和团队奖金</li>
+        <li>参与奖：所有参赛选手获得精美纪念品</li>
+      </ul>
+      
+      <h3>六、注意事项</h3>
+      <ol>
+        <li>请参赛选手提前做好热身准备，避免运动损伤</li>
+        <li>活动期间公司将提供午餐和饮用水</li>
+        <li>请穿着运动服装和运动鞋参加</li>
+        <li>如有身体不适者，请勿参加比赛</li>
+      </ol>
+      
+      <h3>七、联系方式</h3>
+      <p>如有疑问，请联系工会办公室：</p>
+      <ul>
+        <li>联系人：王主席</li>
+        <li>电话：010-8888 7777</li>
+        <li>邮箱：union@company.com</li>
+      </ul>
+      
+      <p>希望各部门积极组织，踊跃参与，展现公司员工风采！</p>
+      
+      <p style="text-align: right; margin-top: 50px;">
+        工会<br>
+        2026 年 3 月 28 日
+      </p>
+    `,
+    attachments: [
+      { name: '春季运动会报名表.docx', url: '#', type: 'doc', size: '128KB' },
+      { name: '运动会赛程安排.pdf', url: '#', type: 'pdf', size: '512KB' }
+    ] as Attachment[],
+    images: [] as NoticeImage[]
+  }
+}
+
+const notice = reactive(noticeDataMap[1]) // 默认显示第一个通知
 
 // 相关通知
 const relatedNotices = ref<RelatedNotice[]>([
@@ -519,8 +644,9 @@ const getFileIcon = (type: string): string => {
   return icons[type] || '📄'
 }
 
-const previewImage = (index: number) => {
-  alert(`预览图片 ${index + 1}`)
+const previewImage = (index: number | string) => {
+  const idx = typeof index === 'string' ? parseInt(index) : index
+  alert(`预览图片 ${idx + 1}`)
   // TODO: 实现图片预览功能
 }
 
@@ -609,7 +735,11 @@ const likeComment = (comment: Comment) => {
 }
 
 onMounted(() => {
-  // TODO: 从 API 加载通知详情
+  // 根据路由参数加载对应的通知详情
+  const noticeId = Number(route.params.id) || 1
+  if (noticeDataMap[noticeId]) {
+    Object.assign(notice, noticeDataMap[noticeId])
+  }
   console.log('加载通知详情:', notice.id)
 })
 </script>
